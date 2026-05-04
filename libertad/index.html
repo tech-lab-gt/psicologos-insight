@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Libertad · Mi Insight</title>
+<style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #f5f7fa;
+  color: #1a1a1a;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+.app-header {
+  background: linear-gradient(135deg, #1a3a5c 0%, #2c5e8c 100%);
+  color: white;
+  padding: 16px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.app-header-inner {
+  max-width: 920px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.logo { font-weight: 700; font-size: 16px; letter-spacing: -0.3px; }
+.logo .brand { opacity: 0.7; font-weight: 400; font-size: 13px; margin-left: 6px; }
+.user-tag {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 18px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.container { max-width: 920px; margin: 0 auto; padding: 16px; }
+
+.welcome {
+  background: white;
+  border-radius: 14px;
+  padding: 18px 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.avatar {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2c5e8c, #1a3a5c);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.welcome-text h1 { font-size: 17px; color: #1a3a5c; margin-bottom: 2px; }
+.welcome-text p { font-size: 12.5px; color: #555; line-height: 1.55; }
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  background: white;
+  border-radius: 10px;
+  padding: 4px;
+  margin-bottom: 14px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  overflow-x: auto;
+}
+.tab {
+  flex: 1;
+  min-width: max-content;
+  padding: 9px 12px;
+  font-size: 12.5px;
+  font-weight: 600;
+  background: transparent;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  color: #6a7280;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+.tab.active { background: #1a3a5c; color: white; }
+
+.view { display: none; }
+.view.active { display: block; }
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.kpi {
+  background: white;
+  border-radius: 10px;
+  padding: 14px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  position: relative;
+  overflow: hidden;
+}
+.kpi::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0; width: 3px;
+  background: #1a3a5c;
+}
+.kpi.good::before { background: #2a7a3f; }
+.kpi.warn::before { background: #d4a017; }
+.kpi-label { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.5px; color: #6a7280; margin-bottom: 4px; font-weight: 600; }
+.kpi-value { font-size: 22px; font-weight: 700; color: #1a3a5c; line-height: 1; }
+.kpi.good .kpi-value { color: #2a7a3f; }
+.kpi.warn .kpi-value { color: #b8860b; }
+.kpi-sub { font-size: 10.5px; color: #6a7280; margin-top: 4px; }
+
+.section {
+  background: white;
+  border-radius: 12px;
+  padding: 16px 18px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  margin-bottom: 12px;
+}
+.section h2 {
+  font-size: 14px;
+  color: #1a3a5c;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+}
+.section h2 .count {
+  background: #e8f0f7;
+  color: #1a3a5c;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+}
+.section h3 {
+  font-size: 13px;
+  color: #2c4860;
+  margin-bottom: 8px;
+  margin-top: 14px;
+  font-weight: 600;
+}
+
+.patient {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eef0f2;
+  font-size: 13px;
+  gap: 10px;
+}
+.patient:last-child { border-bottom: none; }
+.patient-info { flex: 1; min-width: 0; }
+.patient-name { font-weight: 600; color: #1a1a1a; }
+.patient-meta { font-size: 11px; color: #6a7280; }
+.patient-status {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+.status-rojo { background: #fbe4e4; color: #b04545; }
+.status-amarillo { background: #fdf3e0; color: #b8860b; }
+.status-verde { background: #e0f0e3; color: #2a7a3f; }
+
+.meeting {
+  background: linear-gradient(135deg, #f0f7fa, #e8f0f7);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  border-left: 3px solid #2c5e8c;
+}
+.meeting-when { font-size: 11px; text-transform: uppercase; font-weight: 700; color: #2c5e8c; letter-spacing: 0.5px; margin-bottom: 4px; }
+.meeting-title { font-size: 14px; font-weight: 600; color: #1a3a5c; margin-bottom: 6px; }
+.meeting-desc { font-size: 12.5px; color: #444; line-height: 1.55; }
+
+.task-item {
+  padding: 9px 0;
+  border-bottom: 1px solid #eef0f2;
+  font-size: 13px;
+}
+.task-item:last-child { border-bottom: none; }
+.task-title { font-weight: 600; color: #1a1a1a; }
+.task-sub { font-size: 11px; color: #6a7280; margin-top: 1px; }
+
+.note-area {
+  width: 100%;
+  min-height: 100px;
+  border: 1px solid #d8dde2;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 13px;
+  resize: vertical;
+  background: #fafbfc;
+}
+.note-area:focus { outline: none; border-color: #1a3a5c; background: white; }
+
+.placeholder-msg {
+  text-align: center;
+  padding: 20px;
+  color: #6a7280;
+  font-size: 12px;
+  font-style: italic;
+  background: #fafbfc;
+  border-radius: 8px;
+  border: 1px dashed #d8dde2;
+}
+
+.video-card {
+  display: flex;
+  gap: 12px;
+  padding: 10px;
+  background: #fafbfc;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  border: 1px solid transparent;
+}
+.video-thumb {
+  width: 80px; height: 50px;
+  background: linear-gradient(135deg, #ccc, #999);
+  border-radius: 6px;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: white;
+  font-size: 18px;
+}
+.video-info { flex: 1; min-width: 0; }
+.video-title { font-size: 12.5px; font-weight: 600; color: #1a3a5c; margin-bottom: 2px; }
+.video-meta { font-size: 10.5px; color: #6a7280; }
+
+.mini-chart {
+  height: 100px;
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  padding: 8px 0;
+}
+.bar {
+  flex: 1;
+  background: linear-gradient(to top, #2c5e8c, #4080b8);
+  border-radius: 4px 4px 0 0;
+  position: relative;
+  min-height: 12px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  color: white;
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 2px 0;
+}
+.bar.below-meta { background: linear-gradient(to top, #b04545, #d46a6a); }
+.bar.met-meta { background: linear-gradient(to top, #2a7a3f, #4ca860); }
+.bar.no-data { background: #d8dde2; color: transparent; }
+.chart-labels {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+.chart-label {
+  flex: 1;
+  text-align: center;
+  font-size: 10px;
+  color: #6a7280;
+}
+
+/* PROTOCOLO TAB - flashcards embebidas */
+.proto-modes {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+  background: #f0f3f6;
+  border-radius: 10px;
+  padding: 4px;
+  overflow-x: auto;
+}
+.proto-mode-btn {
+  flex: 1;
+  min-width: max-content;
+  padding: 8px 10px;
+  font-size: 11.5px;
+  font-weight: 600;
+  background: transparent;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  color: #6a7280;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+.proto-mode-btn.active { background: white; color: #1a3a5c; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.proto-view { display: none; }
+.proto-view.active { display: block; }
+
+.flashcard {
+  background: white;
+  border-radius: 12px;
+  padding: 18px 20px;
+  border: 1px solid #e8eef2;
+  position: relative;
+  overflow: hidden;
+  min-height: 320px;
+}
+.flashcard::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #1a3a5c, #2c5e8c);
+}
+.flashcard.opcional::before { background: linear-gradient(90deg, #b8860b, #d4a017); }
+.flashcard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 14px;
+  gap: 12px;
+}
+.flashcard-num {
+  background: #1a3a5c;
+  color: white;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+.flashcard.opcional .flashcard-num { background: #b8860b; }
+.flashcard-title-wrap { flex: 1; min-width: 0; }
+.flashcard-title { font-size: 15px; font-weight: 700; color: #1a3a5c; margin-bottom: 2px; }
+.flashcard-tag { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #2a7a3f; }
+.flashcard.opcional .flashcard-tag { color: #b8860b; }
+.por-que {
+  background: #f5f7fa;
+  border-left: 3px solid #1a3a5c;
+  padding: 10px 12px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  font-size: 12.5px;
+  color: #2c4860;
+}
+.flashcard.opcional .por-que { border-left-color: #b8860b; }
+.example {
+  font-style: italic;
+  font-size: 12.5px;
+  color: #333;
+  padding: 7px 10px;
+  border-left: 2px solid #d8dde2;
+  margin-bottom: 5px;
+  background: #fafbfc;
+  border-radius: 0 4px 4px 0;
+}
+.section-label {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  font-weight: 600;
+  color: #6a7280;
+  margin: 10px 0 6px;
+}
+.flashcard-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  gap: 10px;
+}
+.flashcard-nav-btn {
+  background: white;
+  border: 1px solid #d8dde2;
+  border-radius: 8px;
+  padding: 9px 14px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #1a3a5c;
+  cursor: pointer;
+}
+.flashcard-nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.flashcard-nav-btn:hover:not(:disabled) { background: #1a3a5c; color: white; border-color: #1a3a5c; }
+.progress { font-size: 11.5px; color: #6a7280; font-weight: 600; }
+
+.resumen-list { list-style: none; padding: 0; }
+.resumen-item {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eef0f2;
+  font-size: 13px;
+}
+.resumen-item:last-child { border-bottom: none; }
+.resumen-num {
+  background: #1a3a5c;
+  color: white;
+  min-width: 24px; height: 24px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.resumen-item.opcional .resumen-num { background: #b8860b; }
+.resumen-text strong { color: #1a3a5c; display: block; margin-bottom: 1px; font-size: 13px; }
+.resumen-text span { font-size: 11.5px; color: #6a7280; }
+
+.tiempo-block {
+  background: #fafbfc;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  border-left: 4px solid #1a3a5c;
+}
+.tiempo-block.media { border-left-color: #b8860b; }
+.tiempo-block.larga { border-left-color: #2a7a3f; }
+.tiempo-titulo { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.tiempo-titulo h4 { font-size: 13.5px; color: #1a3a5c; }
+.tiempo-block p { font-size: 12px; color: #444; }
+.tiempo-puntos { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 6px; }
+.tiempo-pt {
+  font-size: 10.5px;
+  font-weight: 700;
+  background: #1a3a5c;
+  color: white;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.situacion {
+  background: #fafbfc;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.situacion-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: white;
+  display: flex; align-items: center; justify-content: center;
+}
+.situacion-content { flex: 1; }
+.situacion-titulo { font-size: 13px; font-weight: 600; color: #1a3a5c; margin-bottom: 2px; }
+.situacion-accion { font-size: 12px; color: #555; }
+.situacion-puntos { display: inline-flex; gap: 3px; margin-left: 6px; }
+.situacion-pt {
+  font-size: 9px;
+  font-weight: 700;
+  background: #2a7a3f;
+  color: white;
+  padding: 1px 5px;
+  border-radius: 8px;
+}
+
+.ejemplo-text {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #1a1a1a;
+  font-style: italic;
+}
+.ejemplo-text .highlight {
+  background: #fef9e0;
+  border-radius: 3px;
+  padding: 1px 3px;
+  cursor: help;
+}
+.ejemplo-text .highlight:hover { background: #fdf3b8; }
+
+.nota-info {
+  background: #fff8e8;
+  border-left: 3px solid #d4a017;
+  padding: 10px 14px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #6a4a08;
+  margin: 12px 0;
+}
+
+footer {
+  text-align: center;
+  font-size: 10px;
+  color: #888;
+  padding: 16px 8px 8px;
+}
+
+@media (max-width: 480px) {
+  .tabs { flex-wrap: wrap; }
+  .tab { font-size: 11px; padding: 8px 6px; }
+}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="app-header-inner">
+    <div class="logo">Mi Insight <span class="brand">· Plataforma del Psicólogo</span></div>
+    <div class="user-tag">Libertad · Z9</div>
+  </div>
+</div>
+
+<div class="container">
+
+<div class="welcome">
+  <div class="avatar">L</div>
+  <div class="welcome-text">
+    <h1>Hola, Libertad</h1>
+    <p>Tu retención 6 meses es 73.7% con el mayor volumen del equipo (57 S1, 156 citas). Mantener ese balance de volumen y calidad es exactamente lo que vamos a documentar contigo.</p>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" data-view="resumen">Resumen</button>
+  <button class="tab" data-view="pacientes">Pacientes</button>
+  <button class="tab" data-view="formacion">Formación</button>
+  <button class="tab" data-view="protocolo">Protocolo</button>
+  <button class="tab" data-view="notas">Mis notas</button>
+</div>
+
+<!-- RESUMEN -->
+<div class="view active" id="view-resumen">
+  <div class="kpi-grid">
+    <div class="kpi good">
+      <div class="kpi-label">Retención S1→S2 · 6M</div>
+      <div class="kpi-value">73.7%</div>
+      <div class="kpi-sub">42 de 57 S1 · meta clínica 72%</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Citas totales · 6M</div>
+      <div class="kpi-value">156</div>
+      <div class="kpi-sub">Sede principal: Z9</div>
+    </div>
+    <div class="kpi good">
+      <div class="kpi-label">Categoría</div>
+      <div class="kpi-value" style="font-size:18px">Bueno</div>
+      <div class="kpi-sub">Tu nivel actual</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Ranking equipo</div>
+      <div class="kpi-value">#9</div>
+      <div class="kpi-sub">de 27 psicólogos con 5+ S1</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Tu retención últimos 6 meses</h2>
+    <div class="mini-chart" id="miniChart"></div>
+    <div class="chart-labels">
+      <div class="chart-label">Oct</div>
+      <div class="chart-label">Nov</div>
+      <div class="chart-label">Dic</div>
+      <div class="chart-label">Ene</div>
+      <div class="chart-label">Feb</div>
+      <div class="chart-label">Mar</div>
+    </div>
+    <p style="font-size: 11px; color: #6a7280; margin-top: 8px; font-style: italic;">
+      Verde: cumple meta clínica 72% · Naranja: bajo meta · Gris: sin data
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>Próxima reunión 1-a-1 con Allan</h2>
+    <div class="meeting">
+      <div class="meeting-when">Esta semana · día/hora a confirmar con Allan</div>
+      <div class="meeting-title">1-a-1 con Allan · Sesión 1 de 25</div>
+      <div class="meeting-desc">Tu equipo te identificó como caso a documentar: alto volumen sostenido con retención sobre el promedio. Allan quiere mapear cómo cierras tu S1 — esa documentación va a alimentar el video de capacitación que vamos a producir.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Esta semana <span class="count">3</span></h2>
+    <div class="task-item"><div class="task-title">Confirmar día y hora de tu 1-a-1 con Allan</div><div class="task-sub">Esta semana arranca el plan de formación</div></div><div class="task-item"><div class="task-title">Repasar el protocolo de cierre antes de tu próxima S1</div><div class="task-sub">Tab "Protocolo" abajo</div></div><div class="task-item"><div class="task-title">Si tenés un caso de cierre que recuerdes especialmente, anotarlo</div><div class="task-sub">Para llevarlo al 1-a-1</div></div>
+  </div>
+</div>
+
+<!-- PACIENTES -->
+<div class="view" id="view-pacientes">
+  
+
+  <div class="section">
+    <h2>Pacientes en riesgo de no volver <span class="count">1</span></h2>
+    <p style="font-size: 11.5px; color: #6a7280; margin-bottom: 10px; font-style: italic;">
+      Pacientes nuevos sin S2 confirmada o pacientes activos sin asistencia en los últimos 10 días.
+    </p>
+    <div class="patient"><div class="patient-info"><div class="patient-name">S.A.S.</div><div class="patient-meta">S1 del 11-abr · sin S2 confirmada</div></div><span class="patient-status status-amarillo">Pendiente S2</span></div>
+  </div>
+
+  <div class="section">
+    <h2>Tus pacientes activos · semana del 18-26 abr <span class="count">17</span></h2>
+    <p style="font-size: 11.5px; color: #6a7280; margin-bottom: 10px;">
+      Validadas: 17 · Anuladas: 9 · Movidas: 3
+    </p>
+    <div class="patient"><div class="patient-info"><div class="patient-name">M.L.C.</div><div class="patient-meta">Terapia infantil · activo</div></div><span class="patient-status status-verde">Activo</span></div><div class="patient"><div class="patient-info"><div class="patient-name">H.R.B.</div><div class="patient-meta">Terapia individual · activo</div></div><span class="patient-status status-verde">Activo</span></div><div class="patient"><div class="patient-info"><div class="patient-name">E.S.M.</div><div class="patient-meta">Terapia infantil · activo</div></div><span class="patient-status status-verde">Activo</span></div><div class="patient"><div class="patient-info"><div class="patient-name">V.S.C.</div><div class="patient-meta">Terapia individual · activo</div></div><span class="patient-status status-verde">Activo</span></div><div class="patient"><div class="patient-info"><div class="patient-name">S.A.S.</div><div class="patient-meta">Terapia infantil · S1 reciente</div></div><span class="patient-status status-verde">Activo</span></div>
+  </div>
+</div>
+
+<!-- FORMACIÓN -->
+<div class="view" id="view-formacion">
+  <div class="section">
+    <h2>Tu plan de formación con Allan</h2>
+    <div class="meeting">
+      <div class="meeting-when">Próxima sesión</div>
+      <div class="meeting-title">1-a-1 con Allan · Sesión 1 de 25</div>
+      <div class="meeting-desc">Tu equipo te identificó como caso a documentar: alto volumen sostenido con retención sobre el promedio. Allan quiere mapear cómo cierras tu S1 — esa documentación va a alimentar el video de capacitación que vamos a producir.</div>
+    </div>
+    <p style="font-size: 12px; color: #555; margin-top: 12px;">
+      <strong>Plan completo:</strong> 25 reuniones 1-a-1 a lo largo del año (mayo 2026 → abril 2027).
+      Z9 semana 1, Z11 semana 2, Z15 semana 3, psiquiatras semana 4.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>Videos de capacitación</h2>
+    <div class="placeholder-msg">
+      🎥 Los videos están en producción. Cuando estén disponibles aparecerán aquí. Estimado: primer video listo el 23-may.
+    </div>
+    <div style="margin-top: 12px;">
+      <div class="video-card">
+        <div class="video-thumb">📹</div>
+        <div class="video-info">
+          <div class="video-title">[Próximamente] Cómo cierro mi S1 — caso modelo</div>
+          <div class="video-meta">Allan · ~10 min · En producción</div>
+        </div>
+      </div>
+      <div class="video-card">
+        <div class="video-thumb">📹</div>
+        <div class="video-info">
+          <div class="video-title">[Próximamente] Manejo del paciente ansioso por "qué le pasa"</div>
+          <div class="video-meta">Allan · ~8 min · En producción</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROTOCOLO (con flashcards embebidas) -->
+<div class="view" id="view-protocolo">
+  <div class="section" style="padding: 14px 16px;">
+    <h2>Protocolo de Cierre Obligatorio · v3.0</h2>
+    <p style="font-size: 12.5px; color: #555; margin-bottom: 14px;">
+      Antes de cada primera sesión podés repasar este protocolo. Tres formatos según tu necesidad:
+    </p>
+
+    <div class="proto-modes">
+      <button class="proto-mode-btn active" data-proto="puntos">7 puntos</button>
+      <button class="proto-mode-btn" data-proto="resumen">Repaso 60s</button>
+      <button class="proto-mode-btn" data-proto="tiempo">Por tiempo</button>
+      <button class="proto-mode-btn" data-proto="situacion">Situaciones</button>
+      <button class="proto-mode-btn" data-proto="ejemplo">Ejemplo</button>
+    </div>
+
+    <!-- Flashcards de los 7 puntos -->
+    <div class="proto-view active" id="proto-puntos">
+      <div class="flashcard" id="flashcard">
+        <div class="flashcard-header">
+          <div class="flashcard-num" id="fcNum">1</div>
+          <div class="flashcard-title-wrap">
+            <div class="flashcard-title" id="fcTitle"></div>
+            <div class="flashcard-tag" id="fcTag"></div>
+          </div>
+        </div>
+        <div class="por-que" id="fcPorQue"></div>
+        <div class="section-label">Ejemplos</div>
+        <div id="fcEjemplos"></div>
+        <div id="fcExtra"></div>
+      </div>
+      <div class="flashcard-nav">
+        <button class="flashcard-nav-btn" id="fcPrev">← Anterior</button>
+        <span class="progress" id="fcProgress">1 de 7</span>
+        <button class="flashcard-nav-btn" id="fcNext">Siguiente →</button>
+      </div>
+    </div>
+
+    <!-- Resumen 60s -->
+    <div class="proto-view" id="proto-resumen">
+      <h3 style="margin-bottom: 12px; color: #1a3a5c;">⚡ Antes de la S1 · 60 segundos de repaso</h3>
+      <ul class="resumen-list">
+        <li class="resumen-item"><div class="resumen-num">1</div><div class="resumen-text"><strong>Resumen de lo trabajado</strong><span>Lo que oíste hoy + el patrón común</span></div></li>
+        <li class="resumen-item opcional"><div class="resumen-num">2</div><div class="resumen-text"><strong>Impresión clínica preliminar</strong><span>Si lo pide o si hay tiempo · siempre como hipótesis</span></div></li>
+        <li class="resumen-item"><div class="resumen-num">3</div><div class="resumen-text"><strong>Naturaleza del proceso terapéutico</strong><span>"Esto es un proceso, no una sesión aislada"</span></div></li>
+        <li class="resumen-item"><div class="resumen-num">4</div><div class="resumen-text"><strong>Dirección futura</strong><span>"En las siguientes sesiones trabajaremos en..."</span></div></li>
+        <li class="resumen-item opcional"><div class="resumen-num">5</div><div class="resumen-text"><strong>Cierre, evaluación y duración</strong><span>Solo si pregunta cuántas sesiones</span></div></li>
+        <li class="resumen-item"><div class="resumen-num">6</div><div class="resumen-text"><strong>Despedida, alianza y límites</strong><span>"Gracias por tu confianza" + confidencialidad</span></div></li>
+        <li class="resumen-item"><div class="resumen-num">7</div><div class="resumen-text"><strong>Acordar siguiente cita</strong><span>Salir junto al paciente a confirmar con la secretaria</span></div></li>
+      </ul>
+    </div>
+
+    <!-- Por tiempo -->
+    <div class="proto-view" id="proto-tiempo">
+      <div class="tiempo-block">
+        <div class="tiempo-titulo"><h4>⏱ Menos de 5 minutos</h4></div>
+        <p>Resumen breve + Naturaleza del proceso en una frase + Despedida y acordar cita.</p>
+        <div class="tiempo-puntos">
+          <span class="tiempo-pt">1</span><span class="tiempo-pt">3</span><span class="tiempo-pt">6</span><span class="tiempo-pt">7</span>
+        </div>
+      </div>
+      <div class="tiempo-block media">
+        <div class="tiempo-titulo"><h4>⏱ 5-10 minutos</h4></div>
+        <p>Todo lo obligatorio completo. Lo opcional (puntos 2 y 5) solo si el paciente pregunta.</p>
+        <div class="tiempo-puntos">
+          <span class="tiempo-pt">1</span><span class="tiempo-pt">3</span><span class="tiempo-pt">4</span><span class="tiempo-pt">6</span><span class="tiempo-pt">7</span>
+        </div>
+      </div>
+      <div class="tiempo-block larga">
+        <div class="tiempo-titulo"><h4>⏱ Más de 10 minutos</h4></div>
+        <p>Protocolo completo, incluyendo punto 5 si es relevante para este paciente.</p>
+        <div class="tiempo-puntos">
+          <span class="tiempo-pt">1</span><span class="tiempo-pt">2</span><span class="tiempo-pt">3</span><span class="tiempo-pt">4</span><span class="tiempo-pt">5</span><span class="tiempo-pt">6</span><span class="tiempo-pt">7</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Situaciones -->
+    <div class="proto-view" id="proto-situacion">
+      <div class="situacion"><div class="situacion-icon">😰</div><div class="situacion-content"><div class="situacion-titulo">Paciente muy ansioso por "qué le pasa"</div><div class="situacion-accion">Priorizar punto 2, aunque sea breve. <span class="situacion-puntos"><span class="situacion-pt">2</span></span></div></div></div>
+      <div class="situacion"><div class="situacion-icon">📅</div><div class="situacion-content"><div class="situacion-titulo">Paciente pide "cuántas sesiones son"</div><div class="situacion-accion">Incluir punto 5, adaptado a tu abordaje. <span class="situacion-puntos"><span class="situacion-pt">5</span></span></div></div></div>
+      <div class="situacion"><div class="situacion-icon">🤨</div><div class="situacion-content"><div class="situacion-titulo">Paciente escéptico o con alta resistencia</div><div class="situacion-accion">Enfatizar expectativas realistas y alianza. <span class="situacion-puntos"><span class="situacion-pt">3</span><span class="situacion-pt">6</span></span></div></div></div>
+      <div class="situacion"><div class="situacion-icon">🚨</div><div class="situacion-content"><div class="situacion-titulo">Sesión interrumpida por crisis o emergencia</div><div class="situacion-accion">Solo contención y cita; el resto se retoma. <span class="situacion-puntos"><span class="situacion-pt">6</span><span class="situacion-pt">7</span></span></div></div></div>
+      <div class="situacion"><div class="situacion-icon">🚪</div><div class="situacion-content"><div class="situacion-titulo">Paciente no regresará (cierre forzado)</div><div class="situacion-accion">Impresión, recursos externos, cierre afectivo. <span class="situacion-puntos"><span class="situacion-pt">2</span><span class="situacion-pt">5</span><span class="situacion-pt">6</span></span></div></div></div>
+      <div class="situacion"><div class="situacion-icon">💻</div><div class="situacion-content"><div class="situacion-titulo">Primera sesión por plataforma digital</div><div class="situacion-accion">Adaptar coordinación virtual + límites tecnológicos. <span class="situacion-puntos"><span class="situacion-pt">6</span><span class="situacion-pt">7</span></span></div></div></div>
+    </div>
+
+    <!-- Ejemplo de transmisión -->
+    <div class="proto-view" id="proto-ejemplo">
+      <p style="font-size: 12px; color: #6a7280; font-style: italic; margin-bottom: 14px;">Ejemplo de cierre que integra los puntos obligatorios. Pasá el cursor para ver qué punto es cada frase.</p>
+      <div class="ejemplo-text">
+        <span class="highlight" title="Punto 1: Resumen de lo trabajado">"Hoy hablamos de tus dificultades para dormir y cómo se conectan con el estrés laboral; lo que se repite es esa sensación de tensión constante.</span>
+        <span class="highlight" title="Punto 2: Impresión clínica"> Esto que describes parece vincularse con un cuadro ansioso, aunque necesitamos seguir conociéndote para tener una impresión más completa.</span>
+        <span class="highlight" title="Punto 3: Naturaleza del proceso"> Lo importante es que esto que empezamos hoy es solo el inicio de un proceso que iremos construyendo juntos: los cambios profundos necesitan tiempo, y es normal que haya avances y retrocesos.</span>
+        <span class="highlight" title="Punto 4: Dirección futura"> En las siguientes sesiones trabajaremos en tus hábitos de sueño y en cómo manejas la presión en el trabajo.</span>
+        <span class="highlight" title="Punto 6: Despedida, alianza y límites"> Gracias por tu confianza hoy; este espacio es confidencial y mi rol es acompañarte.</span>
+        <span class="highlight" title="Punto 7: Acordar cita"> Quedamos para el próximo martes a las 5 pm."</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Sostén operativo del proceso</h2>
+    <p style="font-size: 12.5px; color: #555; margin-bottom: 10px;">
+      Después de tu cierre, el equipo administrativo continúa el sostén con el paciente. Tu cierre es la palanca principal — pero no la única.
+    </p>
+    <div style="background: #e8f4ed; border-left: 3px solid #2a7a3f; padding: 12px 14px; border-radius: 4px;">
+      <div style="font-size: 12px; line-height: 1.7;">
+        <strong>1.</strong> Mismo día / día siguiente: la secretaria envía mensaje puente al paciente (24-36h post-S1).<br>
+        <strong>2.</strong> 48h antes de S2: confirmación con tu nombre como referencia.<br>
+        <strong>3.</strong> Si no responde: equipo de seguimiento (Kathy/Oseas) activa rescate.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NOTAS -->
+<div class="view" id="view-notas">
+  <div class="section">
+    <h2>Tu versión del protocolo de cierre</h2>
+    <p style="font-size: 12px; color: #555; margin-bottom: 12px;">
+      Acá guardás cómo aplicás vos el protocolo. Para que en tu reunión 1-a-1 con Allan tengan algo concreto que revisar.
+    </p>
+    <textarea class="note-area" placeholder="Cómo presentás la impresión clínica preliminar, cómo hacés la dirección futura, cómo te despedís sin sonar fórmula..."></textarea>
+    <p style="font-size: 10.5px; color: #888; margin-top: 6px; font-style: italic;">
+      Esta nota se pierde al recargar (versión inicial). Copiala a tus notas si querés guardarla.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>Pendientes para mi 1-a-1 con Allan</h2>
+    <textarea class="note-area" placeholder="Casos complejos, dudas técnicas, observaciones del entorno..." style="min-height: 80px;"></textarea>
+  </div>
+</div>
+
+<footer>
+  Insight Psicología Clínica · Plataforma del Psicólogo v1.0 · Libertad · Z9
+</footer>
+
+</div>
+
+<script>
+const PUNTOS = [
+  { num:1, titulo:"Resumen de lo trabajado", tag:"Obligatorio · Siempre", obligatorio:true,
+    porQue:"<strong>Por qué:</strong> Refuerza la atención del terapeuta y ayuda al paciente a organizar lo vivido.",
+    ejemplos:["Hoy hablamos de tus dificultades para dormir, de cómo se relacionan con el estrés laboral, y vimos que lo común es la sensación de tensión constante.","Hemos revisado tus preocupaciones sobre tu relación de pareja y cómo se conectan con sentimientos de inseguridad.","Exploramos tus síntomas físicos y emocionales; lo que se repite es la sensación de agotamiento."]
+  },
+  { num:2, titulo:"Impresión clínica preliminar", tag:"Si paciente lo solicita o queda tiempo", obligatorio:false,
+    porQue:"<strong>Por qué:</strong> Responde a la demanda de \"saber qué me pasa\" sin apresurar diagnóstico definitivo. El diagnóstico es hipótesis dinámica, no sentencia.",
+    ejemplos:["Tus síntomas corresponden con un cuadro ansioso, aunque necesitamos seguir conociéndote.","Lo que describes parece vincularse con enojo que intentas mantener oculto.","Esto que te pasa parece repetirse a lo largo de tu vida; lo común es la sensación de abandono."],
+    extra:"<div class='section-label'>Fundamentación</div><div style='font-size:11.5px;color:#555;background:#f5f7fa;padding:8px 10px;border-radius:6px'>Los diagnósticos son hipótesis dinámicas (DSM-5, 2013; ICD-11, 2019). Variabilidad histórica + influencia del marco teórico (Westen, 1998). Presentar como provisional.</div>"
+  },
+  { num:3, titulo:"Naturaleza del proceso terapéutico", tag:"Obligatorio · Siempre", obligatorio:true,
+    porQue:"<strong>Por qué:</strong> Refuerza continuidad, alinea expectativas y previene abandono temprano. Muchos pacientes esperan \"solución rápida\".",
+    ejemplos:["Lo que trabajamos hoy es solo el inicio de un proceso que iremos construyendo juntos.","La terapia no es una sesión aislada, sino un camino que requiere tiempo y constancia.","Cada sesión es un paso dentro de un proceso más amplio."],
+    extra:"<div class='section-label'>Sobre expectativas realistas</div><div class='example'>Es normal que los cambios no se noten en una o dos sesiones; el proceso incluye avances y retrocesos.</div>"
+  },
+  { num:4, titulo:"Dirección futura", tag:"Obligatorio · Siempre", obligatorio:true,
+    porQue:"<strong>Por qué:</strong> Evita que la sesión quede inconclusa y muestra que hay un plan.",
+    ejemplos:["Pienso que en las siguientes sesiones sería importante trabajar en tus hábitos de sueño y en tus recursos personales.","Podemos enfocarnos en cómo expresás tus emociones, en tu relación con la familia.","Me parece útil explorar tu historia personal, tus vínculos y cómo influyen en lo que te pasa hoy."]
+  },
+  { num:5, titulo:"Cierre, evaluación y duración", tag:"Opcional · Solo si pregunta", obligatorio:false,
+    porQue:"<strong>Por qué:</strong> Ofrece claridad sobre el cierre y previene abandono precoz. Mostrar tanto procesos abiertos como protocolos estructurados.",
+    ejemplos:["El proceso termina cuando alcanzamos los objetivos definidos juntos.","Cuando sentís que lo que te preocupaba ya no pesa de la misma manera.","Después de unas cuatro sesiones podemos evaluar juntos cómo te has sentido."]
+  },
+  { num:6, titulo:"Despedida, alianza y límites", tag:"Obligatorio · Siempre", obligatorio:true,
+    porQue:"<strong>Por qué:</strong> Refuerza la alianza terapéutica y garantiza seguridad y confianza desde el inicio.",
+    ejemplos:["Gracias por tu confianza hoy; iremos construyendo juntos este camino.","Valoro que hayas compartido esto; seguiremos trabajando paso a paso.","Este espacio es confidencial; mi rol no es juzgarte sino acompañarte."]
+  },
+  { num:7, titulo:"Acordar la siguiente cita", tag:"Obligatorio · Siempre", obligatorio:true,
+    porQue:"<strong>Por qué:</strong> Refuerza compromiso y reduce probabilidad de no agendar S2.",
+    ejemplos:["Entonces quedamos para el próximo martes a las 5 pm."],
+    extra:"<div class='section-label'>Acción operativa</div><div style='font-size:12.5px;color:#333;background:#f5f7fa;padding:10px 12px;border-radius:6px'>Salir junto al paciente al final de la sesión y presentarlo a la secretaria. <strong>No dejar que el paciente salga solo sin agenda confirmada.</strong></div>"
+  }
+];
+
+let idx = 0;
+const $ = id => document.getElementById(id);
+
+function renderFlashcard() {
+  const p = PUNTOS[idx];
+  $('fcNum').textContent = p.num;
+  $('fcTitle').textContent = p.titulo;
+  $('fcTag').textContent = p.tag;
+  $('fcPorQue').innerHTML = p.porQue;
+  $('fcEjemplos').innerHTML = p.ejemplos.map(e => `<div class="example">"${e}"</div>`).join('');
+  $('fcExtra').innerHTML = p.extra || '';
+  $('fcProgress').textContent = (idx+1) + ' de 7';
+  $('fcPrev').disabled = idx === 0;
+  $('fcNext').disabled = idx === PUNTOS.length-1;
+  const card = $('flashcard');
+  card.classList.toggle('opcional', !p.obligatorio);
+}
+
+$('fcPrev').addEventListener('click', () => { if (idx>0) { idx--; renderFlashcard(); } });
+$('fcNext').addEventListener('click', () => { if (idx<PUNTOS.length-1) { idx++; renderFlashcard(); } });
+
+// Tabs principales
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.getElementById('view-' + t.dataset.view).classList.add('active');
+  });
+});
+
+// Sub-tabs protocolo
+document.querySelectorAll('.proto-mode-btn').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('.proto-mode-btn').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    document.querySelectorAll('.proto-view').forEach(v => v.classList.remove('active'));
+    document.getElementById('proto-' + b.dataset.proto).classList.add('active');
+  });
+});
+
+// Mini chart
+const TREND = [70, 65, 78, 72, 80, 73];
+const META = 72;
+const chart = $('miniChart');
+const max = Math.max(...TREND.filter(v => v !== null), META);
+TREND.forEach(v => {
+  const bar = document.createElement('div');
+  bar.className = 'bar';
+  if (v === null) {
+    bar.classList.add('no-data');
+    bar.style.height = '20%';
+    bar.textContent = '-';
+  } else {
+    if (v < 65) bar.classList.add('below-meta');
+    else if (v >= META) bar.classList.add('met-meta');
+    bar.style.height = (v / max * 100) + '%';
+    bar.textContent = v + '%';
+  }
+  chart.appendChild(bar);
+});
+
+renderFlashcard();
+</script>
+</body>
+</html>

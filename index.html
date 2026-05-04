@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Insight · Plataforma del Psicólogo</title>
+<style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+  color: #1a1a1a;
+  line-height: 1.6;
+  min-height: 100vh;
+  padding: 24px 16px;
+}
+.container { max-width: 720px; margin: 0 auto; }
+.hero {
+  background: white;
+  border-radius: 14px;
+  padding: 32px 28px;
+  box-shadow: 0 4px 16px rgba(26, 58, 92, 0.08);
+  margin-bottom: 16px;
+  text-align: center;
+}
+.hero h1 { font-size: 22px; color: #1a3a5c; margin-bottom: 6px; }
+.hero p { font-size: 13px; color: #6a7280; }
+.hero .badge {
+  display: inline-block;
+  background: #e8f0f7;
+  color: #1a3a5c;
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+.intro {
+  background: white;
+  border-radius: 12px;
+  padding: 18px 22px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  margin-bottom: 14px;
+  font-size: 13.5px;
+  color: #444;
+}
+.intro p { margin-bottom: 8px; }
+.intro p:last-child { margin-bottom: 0; }
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 18px 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: all 0.15s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: #1a3a5c;
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(26, 58, 92, 0.12);
+  border-color: #2c5e8c;
+}
+.card-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a3a5c;
+  margin-bottom: 2px;
+}
+.card-sede {
+  font-size: 11.5px;
+  color: #6a7280;
+  margin-bottom: 8px;
+}
+.card-stat {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2a7a3f;
+}
+.card-stat-label {
+  font-size: 10.5px;
+  color: #6a7280;
+  margin-top: 2px;
+}
+footer {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 11px;
+  color: #888;
+}
+.warning {
+  background: #fff8e8;
+  border-left: 3px solid #d4a017;
+  padding: 12px 14px;
+  border-radius: 4px;
+  font-size: 12.5px;
+  color: #6a4a08;
+  margin: 16px 0 0;
+}
+.warning strong { color: #8a6d0a; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="hero">
+  <h1>Mi Insight · Plataforma del Psicólogo</h1>
+  <p>Versión 1.0 · piloto interno con 5 psicólogas top performers</p>
+  <span class="badge">Validación interna · No compartir afuera</span>
+</div>
+
+<div class="intro">
+  <p><strong>Para Emerson:</strong> esta es la página de selección. Cada psicóloga tiene su propia URL personalizada. En producción real cada una recibe SOLO su link, no esta vista completa.</p>
+  <p>Cada perfil incluye: sus números reales (retención 6M, citas, ranking), su próxima reunión 1-a-1 con Allan, sus pacientes activos en la ventana 18-26 abril, el protocolo completo embebido (flashcards + repaso 60s + situaciones + ejemplo), y un espacio para sus notas.</p>
+</div>
+
+<div class="cards">
+  <a class="card" href="libertad/index.html">
+    <div class="card-name">Libertad</div>
+    <div class="card-sede">Z9 · 156 citas 6M</div>
+    <div class="card-stat">73.7%</div>
+    <div class="card-stat-label">Retención S1→S2 · Ranking #9</div>
+  </a>
+  <a class="card" href="amanda/index.html">
+    <div class="card-name">Amanda Salguero</div>
+    <div class="card-sede">Z11 · 99 citas 6M</div>
+    <div class="card-stat">82.6%</div>
+    <div class="card-stat-label">Retención S1→S2 · Ranking #3</div>
+  </a>
+  <a class="card" href="krista/index.html">
+    <div class="card-name">Krista Guzmán</div>
+    <div class="card-sede">Z15 · 230 citas 6M</div>
+    <div class="card-stat">80.0%</div>
+    <div class="card-stat-label">Retención S1→S2 · Ranking #5</div>
+  </a>
+  <a class="card" href="astrid/index.html">
+    <div class="card-name">Astrid García</div>
+    <div class="card-sede">Z9 · 70 citas 6M</div>
+    <div class="card-stat">90.9%</div>
+    <div class="card-stat-label">Retención S1→S2 · Ranking #1</div>
+  </a>
+  <a class="card" href="ana-gabriela/index.html">
+    <div class="card-name">Ana Gabriela Pereira</div>
+    <div class="card-sede">Z9 · 28 citas 6M</div>
+    <div class="card-stat">84.6%</div>
+    <div class="card-stat-label">Retención S1→S2 · Ranking #2</div>
+  </a>
+</div>
+
+<div class="warning">
+  <strong>Datos confidenciales.</strong> Esta plataforma contiene información clínica sensible. Una vez subida a GitHub Pages, las URLs son públicas. Usar nombres de pacientes solo con iniciales (como ya está). NO compartir el link de esta página principal con los psicólogos — solo su URL individual.
+</div>
+
+<footer>
+  Insight Psicología Clínica · Plataforma del Psicólogo MVP v1.0 · 1-may-2026
+</footer>
+
+</div>
+</body>
+</html>
