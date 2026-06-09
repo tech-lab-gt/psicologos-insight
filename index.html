@@ -1,176 +1,199 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
+<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mi Insight · Plataforma del Psicólogo</title>
-<style>
-:root { color-scheme: light; }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
-  color: #1a1a1a;
-  line-height: 1.6;
-  min-height: 100vh;
-  padding: 24px 16px;
-}
-.container { max-width: 720px; margin: 0 auto; }
-.hero {
-  background: white;
-  border-radius: 14px;
-  padding: 32px 28px;
-  box-shadow: 0 4px 16px rgba(26, 58, 92, 0.08);
-  margin-bottom: 16px;
-  text-align: center;
-}
-.hero h1 { font-size: 22px; color: #1a3a5c; margin-bottom: 6px; }
-.hero p { font-size: 13px; color: #6a7280; }
-.hero .badge {
-  display: inline-block;
-  background: #e8f0f7;
-  color: #1a3a5c;
-  padding: 3px 10px;
-  border-radius: 10px;
-  font-size: 11px;
-  font-weight: 600;
-  margin-top: 8px;
-}
-.intro {
-  background: white;
-  border-radius: 12px;
-  padding: 18px 22px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  margin-bottom: 14px;
-  font-size: 13.5px;
-  color: #444;
-}
-.intro p { margin-bottom: 8px; }
-.intro p:last-child { margin-bottom: 0; }
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 12px;
-}
-.card {
-  background: white;
-  border-radius: 12px;
-  padding: 18px 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  transition: all 0.15s;
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  border: 1px solid transparent;
-  position: relative;
-  overflow: hidden;
-}
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: #1a3a5c;
-}
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(26, 58, 92, 0.12);
-  border-color: #2c5e8c;
-}
-.card-name {
-  font-size: 16px;
-  font-weight: 700;
-  color: #1a3a5c;
-  margin-bottom: 2px;
-}
-.card-sede {
-  font-size: 11.5px;
-  color: #6a7280;
-  margin-bottom: 8px;
-}
-.card-stat {
-  font-size: 20px;
-  font-weight: 700;
-  color: #2a7a3f;
-}
-.card-stat-label {
-  font-size: 10.5px;
-  color: #6a7280;
-  margin-top: 2px;
-}
-footer {
-  margin-top: 24px;
-  text-align: center;
-  font-size: 11px;
-  color: #888;
-}
-.warning {
-  background: #fff8e8;
-  border-left: 3px solid #d4a017;
-  padding: 12px 14px;
-  border-radius: 4px;
-  font-size: 12.5px;
-  color: #6a4a08;
-  margin: 16px 0 0;
-}
-.warning strong { color: #8a6d0a; }
-</style>
-</head>
-<body>
+<title>Mi Insight · Plataforma del Psicólogo</title><style>:root{color-scheme:light}*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:linear-gradient(135deg,#f5f7fa 0%,#e8eef5 100%);color:#1a1a1a;line-height:1.6;min-height:100vh;padding:24px 16px}.container{max-width:980px;margin:0 auto}.hero{background:white;border-radius:14px;padding:32px 28px;box-shadow:0 4px 16px rgba(26,58,92,.08);margin-bottom:16px;text-align:center}.hero h1{font-size:22px;color:#1a3a5c;margin-bottom:6px}.hero p{font-size:13px;color:#6a7280}.hero .badge{display:inline-block;background:#e8f0f7;color:#1a3a5c;padding:3px 10px;border-radius:10px;font-size:11px;font-weight:600;margin-top:8px}.intro{background:white;border-radius:12px;padding:18px 22px;box-shadow:0 2px 8px rgba(0,0,0,.04);margin-bottom:14px;font-size:13.5px;color:#444}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.card{background:white;border-radius:12px;padding:18px 20px;box-shadow:0 2px 8px rgba(0,0,0,.04);transition:all .15s;text-decoration:none;color:inherit;display:block;border:1px solid transparent;position:relative;overflow:hidden}.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:#1a3a5c}.card:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(26,58,92,.12);border-color:#2c5e8c}.card-name{font-size:16px;font-weight:700;color:#1a3a5c;margin-bottom:2px}.card-sede{font-size:11.5px;color:#6a7280;margin-bottom:8px}.card-stat{font-size:20px;font-weight:700;color:#2a7a3f}.card-stat-label{font-size:10.5px;color:#6a7280;margin-top:2px}footer{margin-top:24px;text-align:center;font-size:11px;color:#888}.warning{background:#fff8e8;border-left:3px solid #d4a017;padding:12px 14px;border-radius:4px;font-size:12.5px;color:#6a4a08;margin:16px 0 0}</style></head><body>
 <div class="container">
-
-<div class="hero">
-  <h1>Mi Insight · Plataforma del Psicólogo</h1>
-  <p>Versión 1.0 · piloto interno con 5 psicólogas top performers</p>
-  <span class="badge">Validación interna · No compartir afuera</span>
-</div>
-
-<div class="intro">
-  <p><strong>Para Emerson:</strong> esta es la página de selección. Cada psicóloga tiene su propia URL personalizada. En producción real cada una recibe SOLO su link, no esta vista completa.</p>
-  <p>Cada perfil incluye: sus números reales (retención 6M, citas, ranking), su próxima reunión 1-a-1 con Allan, sus pacientes activos en la ventana 18-26 abril, el protocolo completo embebido (flashcards + repaso 60s + situaciones + ejemplo), y un espacio para sus notas.</p>
-</div>
-
+<div class="hero"><h1>Mi Insight · Plataforma del Psicólogo</h1>
+<p>Retención C1→C2 · ventana 16 días · meta 72% · global del equipo 59.1%</p>
+<span class="badge">Datos al 7 de jun 2026 · uso interno</span></div>
+<div class="intro"><p><strong>Para Emerson:</strong> portada de selección. Cada psicólogo recibe SOLO su link individual, no esta vista completa. 31 psicólogos · 26 en ranking (con 5+ primeras citas).</p></div>
 <div class="cards">
-  <a class="card" href="libertad/index.html">
-    <div class="card-name">Libertad</div>
-    <div class="card-sede">Z9 · 156 citas 6M</div>
-    <div class="card-stat">73.7%</div>
-    <div class="card-stat-label">Retención S1→S2 · Ranking #9</div>
-  </a>
-  <a class="card" href="amanda/index.html">
-    <div class="card-name">Amanda Salguero</div>
-    <div class="card-sede">Z11 · 99 citas 6M</div>
-    <div class="card-stat">82.6%</div>
-    <div class="card-stat-label">Retención S1→S2 · Ranking #3</div>
-  </a>
-  <a class="card" href="krista/index.html">
+  <a class="card" href="krista-guzman-32728a.html">
     <div class="card-name">Krista Guzmán</div>
-    <div class="card-sede">Z15 · 230 citas 6M</div>
-    <div class="card-stat">80.0%</div>
-    <div class="card-stat-label">Retención S1→S2 · Ranking #5</div>
+    <div class="card-sede">Z15 · 245 citas 6M</div>
+    <div class="card-stat">82.1%</div>
+    <div class="card-stat-label">Retención C1→C2 · Ranking #1</div>
   </a>
-  <a class="card" href="astrid/index.html">
+  <a class="card" href="astrid-garcia-f2b8be.html">
     <div class="card-name">Astrid García</div>
-    <div class="card-sede">Z9 · 70 citas 6M</div>
-    <div class="card-stat">90.9%</div>
-    <div class="card-stat-label">Retención S1→S2 · Ranking #1</div>
+    <div class="card-sede">Z9 · 24 citas 6M</div>
+    <div class="card-stat">80.0%</div>
+    <div class="card-stat-label">Retención C1→C2 · Ranking #2</div>
   </a>
-  <a class="card" href="ana-gabriela/index.html">
+  <a class="card" href="laura-barrios-c819fc.html">
+    <div class="card-name">Laura Barrios</div>
+    <div class="card-sede">Z15 · 158 citas 6M</div>
+    <div class="card-stat">76.3%</div>
+    <div class="card-stat-label">Retención C1→C2 · Ranking #3</div>
+  </a>
+  <a class="card" href="jade-pineda-2ba452.html">
+    <div class="card-name">Jade Pineda</div>
+    <div class="card-sede">Z11 · 197 citas 6M</div>
+    <div class="card-stat">73.1%</div>
+    <div class="card-stat-label">Retención C1→C2 · Ranking #4</div>
+  </a>
+  <a class="card" href="libertad-dbdf93.html">
+    <div class="card-name">Libertad</div>
+    <div class="card-sede">Z9 · 222 citas 6M</div>
+    <div class="card-stat">72.7%</div>
+    <div class="card-stat-label">Retención C1→C2 · Ranking #5</div>
+  </a>
+  <a class="card" href="amanda-salguero-1439d3.html">
+    <div class="card-name">Amanda Salguero</div>
+    <div class="card-sede">Z11 · 109 citas 6M</div>
+    <div class="card-stat">68.2%</div>
+    <div class="card-stat-label">Retención C1→C2 · Ranking #6</div>
+  </a>
+  <a class="card" href="hellen-orozco-77a687.html">
+    <div class="card-name">Hellen Orozco</div>
+    <div class="card-sede">Z9 · 362 citas 6M</div>
+    <div class="card-stat">67.7%</div>
+    <div class="card-stat-label">Retención C1→C2 · Ranking #7</div>
+  </a>
+  <a class="card" href="carlos-silva-5c4806.html">
+    <div class="card-name">Carlos Silva</div>
+    <div class="card-sede">Z15 · 94 citas 6M</div>
+    <div class="card-stat">66.7%</div>
+    <div class="card-stat-label">Retención C1→C2 · Ranking #8</div>
+  </a>
+  <a class="card" href="alejandra-vettorazzi-f909a3.html">
+    <div class="card-name">Alejandra Vettorazzi</div>
+    <div class="card-sede">Z9 · 155 citas 6M</div>
+    <div class="card-stat">64.9%</div>
+    <div class="card-stat-label">Retención C1→C2 · Ranking #9</div>
+  </a>
+  <a class="card" href="patricia-gonzalez-villegas-83024a.html">
+    <div class="card-name">Patricia González Villegas</div>
+    <div class="card-sede">Z15 · 141 citas 6M</div>
+    <div class="card-stat">64.3%</div>
+    <div class="card-stat-label">Retención C1→C2 · Ranking #10</div>
+  </a>
+  <a class="card" href="beatriz-mora-0ccdb1.html">
+    <div class="card-name">Beatriz Mora</div>
+    <div class="card-sede">Z15 · 146 citas 6M</div>
+    <div class="card-stat">62.5%</div>
+    <div class="card-stat-label">Retención C1→C2 · Ranking #11</div>
+  </a>
+  <a class="card" href="ana-gabriela-pereira-68d3d8.html">
     <div class="card-name">Ana Gabriela Pereira</div>
+    <div class="card-sede">Z9 · 79 citas 6M</div>
+    <div class="card-stat">61.9%</div>
+    <div class="card-stat-label">Retención C1→C2 · Ranking #12</div>
+  </a>
+  <a class="card" href="allan-hernandez-b57f23.html">
+    <div class="card-name">Allan Hernandez</div>
+    <div class="card-sede">Z9 · 258 citas 6M</div>
+    <div class="card-stat">59.1%</div>
+    <div class="card-stat-label">Retención C1→C2 · Ranking #13</div>
+  </a>
+  <a class="card" href="vivian-richards-dd21d6.html">
+    <div class="card-name">Vivian Richards</div>
+    <div class="card-sede">Z11 · 290 citas 6M</div>
+    <div class="card-stat">56.9%</div>
+    <div class="card-stat-label">Retención C1→C2 · Ranking #14</div>
+  </a>
+  <a class="card" href="david-letona-916d84.html">
+    <div class="card-name">David Letona</div>
+    <div class="card-sede">Z9 · 93 citas 6M</div>
+    <div class="card-stat">56.5%</div>
+    <div class="card-stat-label">Retención C1→C2 · Ranking #15</div>
+  </a>
+  <a class="card" href="alejandro-ochoa-72dda6.html">
+    <div class="card-name">Alejandro Ochoa</div>
+    <div class="card-sede">Z15 · 105 citas 6M</div>
+    <div class="card-stat">56.5%</div>
+    <div class="card-stat-label">Retención C1→C2 · Ranking #16</div>
+  </a>
+  <a class="card" href="lucia-hernandez-d755a0.html">
+    <div class="card-name">Lucía Hernández</div>
+    <div class="card-sede">Z15 · 161 citas 6M</div>
+    <div class="card-stat">54.5%</div>
+    <div class="card-stat-label">Retención C1→C2 · Ranking #17</div>
+  </a>
+  <a class="card" href="faride-coll-6e6df8.html">
+    <div class="card-name">Faride Coll</div>
+    <div class="card-sede">Z9 · 94 citas 6M</div>
+    <div class="card-stat">52.2%</div>
+    <div class="card-stat-label">Retención C1→C2 · Ranking #18</div>
+  </a>
+  <a class="card" href="kennete-chinchilla-49a350.html">
+    <div class="card-name">Kennete Chinchilla</div>
+    <div class="card-sede">Z15 · 98 citas 6M</div>
+    <div class="card-stat">51.9%</div>
+    <div class="card-stat-label">Retención C1→C2 · Ranking #19</div>
+  </a>
+  <a class="card" href="jaqueline-giron-45f82e.html">
+    <div class="card-name">Jaqueline Girón</div>
+    <div class="card-sede">Z15 · 27 citas 6M</div>
+    <div class="card-stat">50.0%</div>
+    <div class="card-stat-label">Retención C1→C2 · Ranking #20</div>
+  </a>
+  <a class="card" href="jhordy-c8c839.html">
+    <div class="card-name">Jhordy</div>
     <div class="card-sede">Z9 · 28 citas 6M</div>
-    <div class="card-stat">84.6%</div>
-    <div class="card-stat-label">Retención S1→S2 · Ranking #2</div>
+    <div class="card-stat">50.0%</div>
+    <div class="card-stat-label">Retención C1→C2 · Ranking #21</div>
+  </a>
+  <a class="card" href="emerson-morales-3be4d5.html">
+    <div class="card-name">Emerson Morales</div>
+    <div class="card-sede">Z9 · 334 citas 6M</div>
+    <div class="card-stat">44.4%</div>
+    <div class="card-stat-label">Retención C1→C2 · Ranking #22</div>
+  </a>
+  <a class="card" href="roscio-hernandez-92377a.html">
+    <div class="card-name">Roscío Hernández</div>
+    <div class="card-sede">Z11 · 112 citas 6M</div>
+    <div class="card-stat">43.8%</div>
+    <div class="card-stat-label">Retención C1→C2 · Ranking #23</div>
+  </a>
+  <a class="card" href="aransasu-aguilar-421acc.html">
+    <div class="card-name">Aransasu Aguilar</div>
+    <div class="card-sede">Z9 · 120 citas 6M</div>
+    <div class="card-stat">42.9%</div>
+    <div class="card-stat-label">Retención C1→C2 · Ranking #24</div>
+  </a>
+  <a class="card" href="adriana-castro-e2047e.html">
+    <div class="card-name">Adriana Castro</div>
+    <div class="card-sede">Z9 · 158 citas 6M</div>
+    <div class="card-stat">26.9%</div>
+    <div class="card-stat-label">Retención C1→C2 · Ranking #25</div>
+  </a>
+  <a class="card" href="abner-anton-3f95e2.html">
+    <div class="card-name">Abner Anton</div>
+    <div class="card-sede">Z15 · 93 citas 6M</div>
+    <div class="card-stat">16.0%</div>
+    <div class="card-stat-label">Retención C1→C2 · Ranking #26</div>
+  </a>
+  <a class="card" href="alexandra-ruiz-049924.html">
+    <div class="card-name">Alexandra Ruiz</div>
+    <div class="card-sede">Z15 · 124 citas 6M</div>
+    <div class="card-stat">100.0%</div>
+    <div class="card-stat-label">Retención C1→C2 · Muestra insuficiente</div>
+  </a>
+  <a class="card" href="ana-carolina-anleu-3d85cc.html">
+    <div class="card-name">Ana Carolina Anleu</div>
+    <div class="card-sede">Z15 · 4 citas 6M</div>
+    <div class="card-stat">50.0%</div>
+    <div class="card-stat-label">Retención C1→C2 · Muestra insuficiente</div>
+  </a>
+  <a class="card" href="faviola-de-leon-b60651.html">
+    <div class="card-name">Faviola de Leon</div>
+    <div class="card-sede">Z9 · 0 citas 6M</div>
+    <div class="card-stat">—</div>
+    <div class="card-stat-label">Retención C1→C2 · Muestra insuficiente</div>
+  </a>
+  <a class="card" href="ines-ochaeta-7e5df2.html">
+    <div class="card-name">Inés Ochaeta</div>
+    <div class="card-sede">Z9 · 3 citas 6M</div>
+    <div class="card-stat">—</div>
+    <div class="card-stat-label">Retención C1→C2 · Muestra insuficiente</div>
+  </a>
+  <a class="card" href="kimberly-lopez-bfa899.html">
+    <div class="card-name">Kimberly López</div>
+    <div class="card-sede">Z11 · 0 citas 6M</div>
+    <div class="card-stat">—</div>
+    <div class="card-stat-label">Retención C1→C2 · Muestra insuficiente</div>
   </a>
 </div>
-
-<div class="warning">
-  <strong>Datos confidenciales.</strong> Esta plataforma contiene información clínica sensible. Una vez subida a GitHub Pages, las URLs son públicas. Usar nombres de pacientes solo con iniciales (como ya está). NO compartir el link de esta página principal con los psicólogos — solo su URL individual.
-</div>
-
-<footer>
-  Insight Psicología Clínica · Plataforma del Psicólogo MVP v1.0 · 1-may-2026
-</footer>
-
-</div>
-</body>
-</html>
+<div class="warning"><strong>Datos confidenciales.</strong> Si esto se sube a un repositorio público, las URLs son accesibles. Mantené el repo en privado y no compartas el link de esta portada con los psicólogos — solo su URL individual.</div>
+<footer>Insight Psicología Clínica · Plataforma del Psicólogo · regenerado automáticamente</footer>
+</div></body></html>
