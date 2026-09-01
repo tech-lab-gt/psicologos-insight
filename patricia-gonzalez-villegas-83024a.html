@@ -11,7 +11,7 @@
 </style></head><body>
 <div class="app-header"><div class="app-header-inner"><div class="logo">Mi Insight <span class="brand">· Plataforma del Psicólogo</span></div><div class="user-tag">Patricia González Villegas · Z15</div></div></div>
 <div class="container">
-<div class="welcome"><div class="avatar">P</div><div class="welcome-text"><h1>Hola, Patricia</h1><p>Tu retención de 6 meses es 62.9% — Por mejorar. 35 primeras citas, 176 citas. Estás arriba del promedio del equipo.</p></div></div>
+<div class="welcome"><div class="avatar">P</div><div class="welcome-text"><h1>Hola, Patricia</h1><p>Tu retención de 6 meses es 64.9% — Por mejorar. 37 primeras citas, 209 citas. Estás arriba del promedio del equipo.</p></div></div>
 <div class="tabs">
 <button class="tab active" data-view="resumen">Resumen</button>
 <button class="tab" data-view="mejorar">Mi desarrollo</button>
@@ -21,18 +21,18 @@
 </div>
 <div class="view active" id="view-resumen">
 <div class="kpi-grid">
-<div class="kpi warn"><div class="kpi-label">Retención C1→C2 · 6M</div><div class="kpi-value">62.9%</div><div class="kpi-sub">22 de 35 primeras citas · meta 72%</div></div>
-<div class="kpi"><div class="kpi-label">Citas totales · 6M</div><div class="kpi-value">176</div><div class="kpi-sub">Sede: Z15</div></div>
+<div class="kpi warn"><div class="kpi-label">Retención C1→C2 · 6M</div><div class="kpi-value">64.9%</div><div class="kpi-sub">24 de 37 primeras citas · meta 72%</div></div>
+<div class="kpi"><div class="kpi-label">Citas totales · 6M</div><div class="kpi-value">209</div><div class="kpi-sub">Sede: Z15</div></div>
 <div class="kpi warn"><div class="kpi-label">Categoría</div><div class="kpi-value" style="font-size:16px">Por mejorar</div><div class="kpi-sub">Tu nivel actual</div></div>
-<div class="kpi"><div class="kpi-label">Ranking</div><div class="kpi-value">#8</div><div class="kpi-sub">de 24 con 5+ primeras citas</div></div>
+<div class="kpi"><div class="kpi-label">Ranking</div><div class="kpi-value">#9</div><div class="kpi-sub">de 24 con 5+ primeras citas</div></div>
 </div>
 <div class="section"><h2>Tu retención últimos 6 meses</h2><div class="mini-chart" id="miniChart"></div>
-<div class="chart-labels"><div class="chart-label">feb</div><div class="chart-label">mar</div><div class="chart-label">abr</div><div class="chart-label">may</div><div class="chart-label">jun</div><div class="chart-label">jul</div></div>
+<div class="chart-labels"><div class="chart-label">mar</div><div class="chart-label">abr</div><div class="chart-label">may</div><div class="chart-label">jun</div><div class="chart-label">jul</div><div class="chart-label">ago</div></div>
 <p style="font-size:11px;color:#6a7280;margin-top:8px;font-style:italic">Verde: cumple meta 72% · Rojo: bajo 65% · Gris: sin data</p></div>
-<div class="section"><h2>📊 Tendencia últimas 7 semanas (1-7 jun – 13-19 jul)</h2>
-<p style="font-size:12px;color:#555;margin-bottom:10px">Total reciente: <strong>2 de 7 retuvieron a la 2da cita</strong>.</p>
+<div class="section"><h2>📊 Tendencia últimas 7 semanas (20-26 jul – 31-6 sep)</h2>
+<p style="font-size:12px;color:#555;margin-bottom:10px">Total reciente: <strong>6 de 9 retuvieron a la 2da cita</strong>.</p>
 <div class="weekly-chart" id="weeklyChart"></div>
-<div class="wlabels"><div class="wlabel">S01<br>1-7 jun</div><div class="wlabel">S02<br>8-14 jun</div><div class="wlabel">S03<br>15-21 jun</div><div class="wlabel">S04<br>22-28 jun</div><div class="wlabel" style="opacity:.6">S05*<br>29-5 jul</div><div class="wlabel" style="opacity:.6">S06*<br>6-12 jul</div><div class="wlabel" style="opacity:.6">S07*<br>13-19 jul</div></div>
+<div class="wlabels"><div class="wlabel">S01<br>20-26 jul</div><div class="wlabel">S02<br>27-2 ago</div><div class="wlabel">S03<br>3-9 ago</div><div class="wlabel" style="opacity:.6">S04*<br>10-16 ago</div><div class="wlabel" style="opacity:.6">S05*<br>17-23 ago</div><div class="wlabel" style="opacity:.6">S06*<br>24-30 ago</div><div class="wlabel" style="opacity:.6">S07*<br>31-6 sep</div></div>
 <p style="font-size:10.5px;color:#b04545;margin-top:8px;font-style:italic">* Las semanas más recientes pueden estar inmaduras: los pacientes aún no completaron 16 días para volver. Pasá el cursor sobre cada barra para el detalle.</p></div>
 <div class="section"><h2>Próxima reunión 1-a-1 con Allan</h2>
 <div class="meeting"><div class="meeting-when">A confirmar con Allan</div><div class="meeting-title">1-a-1 con Allan</div><div class="meeting-desc">Plan completo: 25 reuniones a lo largo del año (mayo 2026 → abril 2027).</div></div></div>
@@ -168,9 +168,9 @@ $('fcPrev').addEventListener('click',()=>{if(idx>0){idx--;renderFlashcard();}});
 $('fcNext').addEventListener('click',()=>{if(idx<PUNTOS.length-1){idx++;renderFlashcard();}});
 document.querySelectorAll('.tab').forEach(t=>{t.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById('view-'+t.dataset.view).classList.add('active');});});
 document.querySelectorAll('.proto-mode-btn').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.proto-mode-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.proto-view').forEach(v=>v.classList.remove('active'));document.getElementById('proto-'+b.dataset.proto).classList.add('active');});});
-const TREND=[70.0, 44.4, 80.0, 71.4, 50.0, null];const META=72;const chart=$('miniChart');const valid=TREND.filter(v=>v!==null);const max=valid.length?Math.max(...valid,META):100;
+const TREND=[44.4, 80.0, 71.4, 50.0, 80.0, 50.0];const META=72;const chart=$('miniChart');const valid=TREND.filter(v=>v!==null);const max=valid.length?Math.max(...valid,META):100;
 TREND.forEach(v=>{const bar=document.createElement('div');bar.className='bar';if(v===null){bar.classList.add('no-data');bar.style.height='20%';bar.textContent='-';}else{if(v<65)bar.classList.add('below-meta');else if(v>=META)bar.classList.add('met-meta');bar.style.height=(v/max*100)+'%';bar.textContent=v+'%';}chart.appendChild(bar);});
-const SEM=[{"sem": "S01", "pct": null, "n": 0, "ret": 0, "fecha": "1-7 jun", "imm": false}, {"sem": "S02", "pct": 50.0, "n": 2, "ret": 1, "fecha": "8-14 jun", "imm": false}, {"sem": "S03", "pct": 100.0, "n": 1, "ret": 1, "fecha": "15-21 jun", "imm": false}, {"sem": "S04", "pct": 0.0, "n": 1, "ret": 0, "fecha": "22-28 jun", "imm": false}, {"sem": "S05", "pct": 0.0, "n": 1, "ret": 0, "fecha": "29-5 jul", "imm": true}, {"sem": "S06", "pct": 0.0, "n": 2, "ret": 0, "fecha": "6-12 jul", "imm": true}, {"sem": "S07", "pct": null, "n": 0, "ret": 0, "fecha": "13-19 jul", "imm": true}];const wchart=document.getElementById('weeklyChart');
+const SEM=[{"sem": "S01", "pct": 83.3, "n": 6, "ret": 5, "fecha": "20-26 jul", "imm": false}, {"sem": "S02", "pct": null, "n": 0, "ret": 0, "fecha": "27-2 ago", "imm": false}, {"sem": "S03", "pct": 50.0, "n": 2, "ret": 1, "fecha": "3-9 ago", "imm": false}, {"sem": "S04", "pct": null, "n": 0, "ret": 0, "fecha": "10-16 ago", "imm": true}, {"sem": "S05", "pct": null, "n": 0, "ret": 0, "fecha": "17-23 ago", "imm": true}, {"sem": "S06", "pct": 0.0, "n": 1, "ret": 0, "fecha": "24-30 ago", "imm": true}, {"sem": "S07", "pct": null, "n": 0, "ret": 0, "fecha": "31-6 sep", "imm": true}];const wchart=document.getElementById('weeklyChart');
 if(wchart){SEM.forEach(s=>{const bar=document.createElement('div');bar.className='wbar';if(s.imm)bar.classList.add('immature');if(s.pct===null){bar.classList.add('no-data');bar.style.height='15%';bar.textContent='-';}else{if(s.pct<50)bar.classList.add('bad');else if(s.pct>=70)bar.classList.add('good');else bar.classList.add('warn');bar.style.height=Math.max(s.pct,8)+'%';bar.textContent=s.pct+'%';bar.title=`${s.sem} (${s.fecha}): ${s.ret}/${s.n} = ${s.pct}%`;}wchart.appendChild(bar);});}
 renderFlashcard();
 </script>
